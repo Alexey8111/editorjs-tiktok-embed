@@ -81,7 +81,7 @@ export default class TikTokEmbed {
    *
    */
   _createIframe(url) {
-    const id = (ids) => ids[1];
+    const id = (ids) => ids[2];
     const regex = /https?:\/\/www.tiktok.com\/([^\/\?\&]*)\/video\/([^\/]\d+)/;
     const videoId = regex.exec(url);
     console.log('test videoId', videoId);
