@@ -11,12 +11,12 @@
   font-size: 14px;
 }
 
-.TikTok-wrapper {
+.tiktok-wrapper {
   position: relative;
-  height: 505px;
+  height: 645px;
 }
 
-.TikTok-wrapper iframe {
+.tiktok-wrapper iframe {
   position: absolute;
   top: 0;
   left: 0;

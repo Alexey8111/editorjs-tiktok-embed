@@ -84,7 +84,7 @@ export default class TikTokEmbed {
     const id = (ids) => ids[2];
     const regex = /https?:\/\/www.tiktok.com\/([^\/\?\&]*)\/video\/([^\/]\d+)/;
     const videoId = regex.exec(url);
-    console.log('test videoId', videoId);
+    console.log("test videoId", videoId);
 
     if (!videoId) {
       if (this.isEdited) {
@@ -93,12 +93,10 @@ export default class TikTokEmbed {
       return;
     }
 
-    const embedUrl = `https://www.tiktok.com/embed/v2/${id(
-      videoId
-    )}`;
+    const embedUrl = `https://www.tiktok.com/embed/v2/${id(videoId)}`;
     this.wrapper.innerHTML = null;
     const plyrContainer = document.createElement("div");
-    plyrContainer.classList.add("TikTok-wrapper");
+    plyrContainer.classList.add("tiktok-wrapper");
 
     const iframe = document.createElement("iframe");
     this.embed = embedUrl;
