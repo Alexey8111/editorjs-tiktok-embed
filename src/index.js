@@ -96,21 +96,17 @@ export default class TikTokEmbed {
     const plyrContainer = document.createElement("div");
     plyrContainer.classList.add("tiktok-wrapper");
 
-    
-
     if (url) {
       const urlTiktok = `https://www.tiktok.com/oembed?url=${url}`;
 
       fetch(urlTiktok)
-      .then((response) => {
-        return response.json()
-      })
-      .then((data) => {
-        plyrContainer.innerHTML(data.html);
-      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          plyrContainer.innerHTML = data.html;
+        });
     }
-
-    
 
     const caption = document.createElement("div");
     caption.classList.add("cdx-input", this.CSS.caption);
