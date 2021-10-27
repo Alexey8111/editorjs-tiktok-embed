@@ -103,7 +103,6 @@ export default class TikTokEmbed {
     iframe.setAttribute("src", this.embed);
     iframe.setAttribute("allowfullscreen", true);
     iframe.setAttribute("scrolling", "no");
-    iframe.onload="rubberFrame(this)"
 
 
     plyrContainer.appendChild(iframe);
@@ -125,10 +124,6 @@ export default class TikTokEmbed {
     return true;
   }
 
-  static rubberFrame() {
-    console.log('test onload');
-  }
-
   /**
    * Return block data
    *
@@ -138,6 +133,15 @@ export default class TikTokEmbed {
    */
   save(blockContent) {
     const caption = blockContent.querySelector(`.${this.CSS.caption}`);
+    const frame = blockContent.querySelector("iframe");
+    frame.addEventListener( "load", function(e) {
+
+      this.style.backgroundColor = "red";
+      alert(this.nodeName);
+  
+      console.log(e.target);
+  
+  } )
     return {
       service: "TikTok",
       embed: this.embed,
