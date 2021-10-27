@@ -71,15 +71,20 @@ export default class TikTokEmbed {
     embedIsReady.then(() => {
       const frame = container.querySelector("iframe");
 
-        frame.addEventListener( "load", function(e) {
+      frame.addEventListener("load", function (e) {
+        this.style.height =
+          e.target.contentWindow.document.body.scrollHeight + "px";
 
-        this.style.height = e.target.contentWindow.document.body.scrollHeight + "px";
+        console.log(
+          "test scrollHeight",
+          e.target.contentWindow.document.body.scrollHeight
+        );
+      });
 
-        console.log('test scrollHeight', e.target.contentWindow.document.body.scrollHeight);
-
-    } )
-
-      console.log("test frame in embedIsReady", frame.contentWindow.document.body.scrollHeight);
+      console.log(
+        "test frame in embedIsReady",
+        frame.contentWindow.document.body.scrollHeight
+      );
     });
     this.wrapper = container;
     return container;
@@ -116,6 +121,7 @@ export default class TikTokEmbed {
     iframe.setAttribute("src", this.embed);
     iframe.setAttribute("allowfullscreen", true);
     iframe.setAttribute("scrolling", "no");
+    iframe.setAttribute("onload", "AdjustIFrame('RefFrame');");
 
     plyrContainer.appendChild(iframe);
 
@@ -145,7 +151,7 @@ export default class TikTokEmbed {
    */
   save(blockContent) {
     const caption = blockContent.querySelector(`.${this.CSS.caption}`);
-    
+
     return {
       service: "TikTok",
       embed: this.embed,
