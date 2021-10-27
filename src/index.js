@@ -134,14 +134,16 @@ export default class TikTokEmbed {
   save(blockContent) {
     const caption = blockContent.querySelector(`.${this.CSS.caption}`);
     const frame = blockContent.querySelector("iframe");
-    frame.addEventListener( "load", function(e) {
 
-      this.style.backgroundColor = "red";
-      alert(this.nodeName);
+    console.log('test frame', frame);
+  //   frame.addEventListener( "load", function(e) {
+
+  //     this.style.backgroundColor = "red";
+  //     alert(this.nodeName);
   
-      console.log(e.target);
+  //     console.log(e.target);
   
-  } )
+  // } )
     return {
       service: "TikTok",
       embed: this.embed,
