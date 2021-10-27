@@ -92,7 +92,14 @@ export default class TikTokEmbed {
    */
   async _createIframe(url) {
     let response = await fetch(url, { mode: 'no-cors'});
-    console.log('test response from fetch', response);
+
+    if (response.ok) { // если HTTP-статус в диапазоне 200-299
+      // получаем тело ответа (см. про этот метод ниже)
+      let json = await response.json();
+      console.log('test json from fetch', json);
+    } else {
+      alert("Ошибка HTTP: " + response.status);
+    }
     const id = (ids) => ids[2];
     const regex =
       /https?:\/\/www.tiktok.com\/([^\/\?\&]*)\/video\/([^\/\?\&]*)/;
