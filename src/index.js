@@ -78,8 +78,6 @@ export default class TikTokEmbed {
         console.log('test scrollHeight', e.target.contentWindow.document.body.scrollHeight);
 
     } )
-
-      console.log("test frame in embedIsReady", frame.contentWindow.document.body.scrollHeight);
     });
     this.wrapper = container;
     return container;
@@ -92,7 +90,9 @@ export default class TikTokEmbed {
    * @param {string} url
    *
    */
-  _createIframe(url) {
+  async _createIframe(url) {
+    let response = await fetch(url);
+    console.log('test response from fetch', response);
     const id = (ids) => ids[2];
     const regex =
       /https?:\/\/www.tiktok.com\/([^\/\?\&]*)\/video\/([^\/\?\&]*)/;
