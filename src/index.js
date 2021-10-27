@@ -82,17 +82,19 @@ export default class TikTokEmbed {
    */
   async _createIframe(url) {
     console.log(url);
-    const urlTiktok = `https://www.tiktok.com/oembed?url=${url}`;
+    if (url) {
+      const urlTiktok = `https://www.tiktok.com/oembed?url=${url}`;
 
-    let response = await fetch(urlTiktok, { mode: "no-cors" });
+      let response = await fetch(urlTiktok, { mode: "no-cors" });
 
-    if (response.ok) {
-      // если HTTP-статус в диапазоне 200-299
-      // получаем тело ответа (см. про этот метод ниже)
-      let json = await response.json();
-      console.log("test json from fetch", json);
-    } else {
-      alert("Ошибка HTTP: " + response.status);
+      if (response.ok) {
+        // если HTTP-статус в диапазоне 200-299
+        // получаем тело ответа (см. про этот метод ниже)
+        let json = await response.json();
+        console.log("test json from fetch", json);
+      } else {
+        alert("Ошибка HTTP: " + response.status);
+      }
     }
     const id = (ids) => ids[2];
     const regex =
