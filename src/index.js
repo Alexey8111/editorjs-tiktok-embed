@@ -104,7 +104,10 @@ export default class TikTokEmbed {
           return response.json();
         })
         .then((data) => {
-          plyrContainer.innerHTML = data.html;
+          plyrContainer.innerHTML = data.html.replace(
+            '<script async src="https://www.tiktok.com/embed.js"></script>',
+            ""
+          );
         });
     }
 
