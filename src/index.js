@@ -68,17 +68,7 @@ export default class TikTokEmbed {
     });
 
     const embedIsReady = this.embedIsReady(container);
-    embedIsReady.then(() => {
-      const frame = container.querySelector("iframe");
-
-        frame.addEventListener( "load", function(e) {
-
-        this.style.height = e.target.contentWindow.document.body.scrollHeight + "px";
-
-        console.log('test scrollHeight', e.target.contentWindow.document.body.scrollHeight);
-
-    } )
-    });
+    embedIsReady.then(() => {});
     this.wrapper = container;
     return container;
   }
@@ -91,12 +81,16 @@ export default class TikTokEmbed {
    *
    */
   async _createIframe(url) {
-    let response = await fetch(url, { mode: 'no-cors'});
+    console.log(url);
+    const urlTiktok = `https://www.tiktok.com/oembed?url=${url}`;
 
-    if (response.ok) { // если HTTP-статус в диапазоне 200-299
+    let response = await fetch(urlTiktok, { mode: "no-cors" });
+
+    if (response.ok) {
+      // если HTTP-статус в диапазоне 200-299
       // получаем тело ответа (см. про этот метод ниже)
       let json = await response.json();
-      console.log('test json from fetch', json);
+      console.log("test json from fetch", json);
     } else {
       alert("Ошибка HTTP: " + response.status);
     }
@@ -152,7 +146,7 @@ export default class TikTokEmbed {
    */
   save(blockContent) {
     const caption = blockContent.querySelector(`.${this.CSS.caption}`);
-    
+
     return {
       service: "TikTok",
       embed: this.embed,
