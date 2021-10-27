@@ -122,12 +122,15 @@ export default class TikTokEmbed {
 
     this.wrapper.innerHTML = null;
     const plyrContainer = document.createElement("div");
+    const template = document.createElement('template');
     plyrContainer.classList.add("tiktok-wrapper");
 
     this.embed = embedUrl;
 
-    plyrContainer.innerHTML = html;
-    plyrContainer.content.firstChild.setAttribute('src', this.embed);
+    template.innerHTML = html;
+    template.content.firstChild.setAttribute('src', this.embed);
+
+    plyrContainer.appendChild(template.content.firstChild);
 
     const caption = document.createElement("div");
     caption.classList.add("cdx-input", this.CSS.caption);
