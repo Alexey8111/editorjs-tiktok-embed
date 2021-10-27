@@ -86,8 +86,9 @@ export default class TikTokEmbed {
       const urlTiktok = `https://www.tiktok.com/oembed?url=${url}`;
 
       try {
-        let response = await fetch(urlTiktok, { mode: "no-cors" });
-        let json = await response.json();
+        const response = await fetch(urlTiktok, { mode: "no-cors" });
+        console.log('test response', response);
+        const json = await response.json();
         console.log("test json from fetch", json);
       } catch (error) {
         alert("Ошибка HTTP: " + response.status);
