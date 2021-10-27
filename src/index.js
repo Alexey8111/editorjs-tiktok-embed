@@ -112,18 +112,22 @@ export default class TikTokEmbed {
     }
 
     const embedUrl = `https://www.tiktok.com/embed/v2/${id(videoId)}`;
+    const html =`<iframe  frameborder="0" scrolling="no" allowtransparency="true" onload="setIframeHeight(this)"></iframe> 
+    <script type="text/javascript">
+    function AdjustIFrame(id) {
+        console.log('test AdjustIFrame function', id)
+    }
+
+   </script>`
+
     this.wrapper.innerHTML = null;
     const plyrContainer = document.createElement("div");
     plyrContainer.classList.add("tiktok-wrapper");
 
-    const iframe = document.createElement("iframe");
     this.embed = embedUrl;
-    iframe.setAttribute("src", this.embed);
-    iframe.setAttribute("allowfullscreen", true);
-    iframe.setAttribute("scrolling", "no");
-    iframe.setAttribute("onload", "AdjustIFrame('RefFrame');");
 
-    plyrContainer.appendChild(iframe);
+    plyrContainer.innerHTML = html;
+    plyrContainer.content.firstChild.setAttribute('src', this.embed);
 
     const caption = document.createElement("div");
     caption.classList.add("cdx-input", this.CSS.caption);
