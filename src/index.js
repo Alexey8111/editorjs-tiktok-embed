@@ -71,7 +71,16 @@ export default class TikTokEmbed {
     embedIsReady.then(() => {
       const frame = container.querySelector("iframe");
 
-      console.log("test frame", frame);
+        frame.addEventListener( "load", function(e) {
+
+        this.style.backgroundColor = "red";
+        alert(this.nodeName);
+
+        console.log(e.target);
+
+    } )
+
+      console.log("test frame in embedIsReady", frame);
     });
     this.wrapper = container;
     return container;
@@ -137,17 +146,7 @@ export default class TikTokEmbed {
    */
   save(blockContent) {
     const caption = blockContent.querySelector(`.${this.CSS.caption}`);
-    const frame = blockContent.querySelector("iframe");
-
-    console.log("test frame", frame);
-    //   frame.addEventListener( "load", function(e) {
-
-    //     this.style.backgroundColor = "red";
-    //     alert(this.nodeName);
-
-    //     console.log(e.target);
-
-    // } )
+    
     return {
       service: "TikTok",
       embed: this.embed,
