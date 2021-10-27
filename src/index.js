@@ -112,23 +112,17 @@ export default class TikTokEmbed {
     }
 
     const embedUrl = `https://www.tiktok.com/embed/v2/${id(videoId)}`;
-    const html =`<iframe  frameborder="0" scrolling="no" allowtransparency="true" onload="setIframeHeight(this)"></iframe> 
-    <script type="text/javascript">
-    function AdjustIFrame(id) {
-        console.log('test AdjustIFrame function', id)
-    }
-
-   </script>`
+    const html = `<iframe  frameborder="0" scrolling="no" allowtransparency="true" ></iframe>`;
 
     this.wrapper.innerHTML = null;
     const plyrContainer = document.createElement("div");
-    const template = document.createElement('template');
+    const template = document.createElement("template");
     plyrContainer.classList.add("tiktok-wrapper");
 
     this.embed = embedUrl;
 
     template.innerHTML = html;
-    template.content.firstChild.setAttribute('src', this.embed);
+    template.content.firstChild.setAttribute("src", this.embed);
 
     plyrContainer.appendChild(template.content.firstChild);
 
