@@ -91,7 +91,7 @@ export default class TikTokEmbed {
         const json = await response.json();
         console.log("test json from fetch", json);
       } catch (error) {
-        alert("Ошибка HTTP: " + response.status);
+        alert("Ошибка HTTP: " + error);
       }
     }
     const id = (ids) => ids[2];
