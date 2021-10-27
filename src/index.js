@@ -68,7 +68,19 @@ export default class TikTokEmbed {
     });
 
     const embedIsReady = this.embedIsReady(container);
-    embedIsReady.then(() => {});
+    embedIsReady.then(() => {
+      const frame = container.querySelector("iframe");
+
+        frame.addEventListener( "load", function(e) {
+
+        this.style.height = e.target.contentWindow.document.body.scrollHeight + "px";
+
+        console.log('test scrollHeight', e.target.contentWindow.document.body.scrollHeight);
+
+    } )
+
+      console.log("test frame in embedIsReady", frame.contentWindow.document.body.scrollHeight);
+    });
     this.wrapper = container;
     return container;
   }
@@ -81,10 +93,11 @@ export default class TikTokEmbed {
    *
    */
   _createIframe(url) {
-    console.log("test url", url);
+    const id = (ids) => ids[2];
     const regex =
-      /https?:\/\/www?.tiktok.com\/([^\/\?\&]*)\/video\/([^\/\?\&]*)/;
+      /https?:\/\/www.tiktok.com\/([^\/\?\&]*)\/video\/([^\/\?\&]*)/;
     const videoId = regex.exec(url);
+    console.log("test videoId", videoId);
 
     if (!videoId) {
       if (this.isEdited) {
@@ -93,23 +106,18 @@ export default class TikTokEmbed {
       return;
     }
 
+    const embedUrl = `https://www.tiktok.com/embed/v2/${id(videoId)}`;
+    this.wrapper.innerHTML = null;
     const plyrContainer = document.createElement("div");
     plyrContainer.classList.add("tiktok-wrapper");
 
-    if (url) {
-      const urlTiktok = `https://www.tiktok.com/oembed?url=${url}`;
+    const iframe = document.createElement("iframe");
+    this.embed = embedUrl;
+    iframe.setAttribute("src", this.embed);
+    iframe.setAttribute("allowfullscreen", true);
+    iframe.setAttribute("scrolling", "no");
 
-      fetch(urlTiktok)
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          plyrContainer.innerHTML = data.html.replace(
-            '<script async src="https://www.tiktok.com/embed.js"></script>',
-            ""
-          );
-        });
-    }
+    plyrContainer.appendChild(iframe);
 
     const caption = document.createElement("div");
     caption.classList.add("cdx-input", this.CSS.caption);
@@ -137,7 +145,7 @@ export default class TikTokEmbed {
    */
   save(blockContent) {
     const caption = blockContent.querySelector(`.${this.CSS.caption}`);
-
+    
     return {
       service: "TikTok",
       embed: this.embed,
