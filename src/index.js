@@ -102,7 +102,9 @@ export default class TikTokEmbed {
     this.embed = embedUrl;
     iframe.setAttribute("src", this.embed);
     iframe.setAttribute("allowfullscreen", true);
-    iframe.setAttribute("scrolling", null);
+    iframe.setAttribute("scrolling", "no");
+
+    console.log('test iframe height', iframe.contentWindow.document.body.scrollHeight);
 
     plyrContainer.appendChild(iframe);
 
