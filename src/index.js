@@ -106,7 +106,7 @@ export default class TikTokEmbed {
       return;
     }
 
-    const embedUrl = `https://www.tiktok.com/embed/${id(videoId)}`;
+    const embedUrl = `https://www.tiktok.com/embed/v2/${id(videoId)}`;
     this.wrapper.innerHTML = null;
     const plyrContainer = document.createElement("div");
     plyrContainer.classList.add("tiktok-wrapper");
