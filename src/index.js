@@ -74,9 +74,8 @@ export default class TikTokEmbed {
         frame.addEventListener( "load", function(e) {
 
         this.style.backgroundColor = "red";
-        alert(this.nodeName);
 
-        console.log(e.target);
+        console.log('test scrollHeight', e.contentWindow.document.body.scrollHeight);
 
     } )
 
