@@ -68,24 +68,7 @@ export default class TikTokEmbed {
     });
 
     const embedIsReady = this.embedIsReady(container);
-    embedIsReady.then(() => {
-      const frame = container.querySelector("iframe");
-
-      frame.addEventListener("load", function (e) {
-        this.style.height =
-          e.target.contentWindow.document.body.scrollHeight + "px";
-
-        console.log(
-          "test scrollHeight",
-          e.target.contentWindow.document.body.scrollHeight
-        );
-      });
-
-      console.log(
-        "test frame in embedIsReady",
-        frame.contentWindow.document.body.scrollHeight
-      );
-    });
+    embedIsReady.then(() => {});
     this.wrapper = container;
     return container;
   }
@@ -102,7 +85,6 @@ export default class TikTokEmbed {
     const regex =
       /https?:\/\/www.tiktok.com\/([^\/\?\&]*)\/video\/([^\/\?\&]*)/;
     const videoId = regex.exec(url);
-    console.log("test videoId", videoId);
 
     if (!videoId) {
       if (this.isEdited) {
