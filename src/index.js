@@ -84,14 +84,14 @@ export default class TikTokEmbed {
     const regex =
       /https?:\/\/www.tiktok.com\/([^\/\?\&]*)\/video\/([^\/\?\&]*)/;
     const videoId = regex.exec(url);
-    console.log("test videoId", videoId);
+    console.log("test url", url);
 
-    if (!videoId) {
-      if (this.isEdited) {
-        this.wrapper.querySelector("input").classList.add("invalid");
-      }
-      return;
-    }
+    // if (!videoId) {
+    //   if (this.isEdited) {
+    //     this.wrapper.querySelector("input").classList.add("invalid");
+    //   }
+    //   return;
+    // }
 
     const plyrContainer = document.createElement("div");
     plyrContainer.classList.add("tiktok-wrapper");
