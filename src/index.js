@@ -106,7 +106,7 @@ export default class TikTokEmbed {
         return response.json()
       })
       .then((data) => {
-        plyrContainer.appendChild(data.html);
+        plyrContainer.innerHTML(data.html);
       })
     }
 
