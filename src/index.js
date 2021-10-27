@@ -91,7 +91,7 @@ export default class TikTokEmbed {
    *
    */
   async _createIframe(url) {
-    let response = await fetch(url);
+    let response = await fetch(url, { mode: 'no-cors'});
     console.log('test response from fetch', response);
     const id = (ids) => ids[2];
     const regex =
