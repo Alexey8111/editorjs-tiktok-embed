@@ -80,21 +80,7 @@ export default class TikTokEmbed {
    * @param {string} url
    *
    */
-  async _createIframe(url) {
-    console.log(url);
-    if (url) {
-      const urlTiktok = `https://www.tiktok.com/oembed?url=${url}`;
-
-      try {
-        const response = await fetch(urlTiktok, { mode: "no-cors" });
-        console.log('test response', response);
-        const json = await response.json();
-        console.log("test json from fetch", json);
-      } catch (error) {
-        alert("Ошибка HTTP: " + error);
-      }
-    }
-    const id = (ids) => ids[2];
+  _createIframe(url) {
     const regex =
       /https?:\/\/www.tiktok.com\/([^\/\?\&]*)\/video\/([^\/\?\&]*)/;
     const videoId = regex.exec(url);
@@ -107,18 +93,24 @@ export default class TikTokEmbed {
       return;
     }
 
-    const embedUrl = `https://www.tiktok.com/embed/v2/${id(videoId)}`;
-    this.wrapper.innerHTML = null;
     const plyrContainer = document.createElement("div");
     plyrContainer.classList.add("tiktok-wrapper");
 
-    const iframe = document.createElement("iframe");
-    this.embed = embedUrl;
-    iframe.setAttribute("src", this.embed);
-    iframe.setAttribute("allowfullscreen", true);
-    iframe.setAttribute("scrolling", "no");
+    
 
-    plyrContainer.appendChild(iframe);
+    if (url) {
+      const urlTiktok = `https://www.tiktok.com/oembed?url=${url}`;
+
+      fetch(urlTiktok)
+      .then((response) => {
+        return response.json()
+      })
+      .then((data) => {
+        plyrContainer.appendChild(data.html);
+      })
+    }
+
+    
 
     const caption = document.createElement("div");
     caption.classList.add("cdx-input", this.CSS.caption);
