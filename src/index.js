@@ -68,7 +68,11 @@ export default class TikTokEmbed {
     });
 
     const embedIsReady = this.embedIsReady(container);
-    embedIsReady.then(() => {});
+    embedIsReady.then(() => {
+      const frame = container.querySelector("iframe");
+
+      console.log("test frame", frame);
+    });
     this.wrapper = container;
     return container;
   }
@@ -82,7 +86,8 @@ export default class TikTokEmbed {
    */
   _createIframe(url) {
     const id = (ids) => ids[2];
-    const regex = /https?:\/\/www.tiktok.com\/([^\/\?\&]*)\/video\/([^\/\?\&]*)/;
+    const regex =
+      /https?:\/\/www.tiktok.com\/([^\/\?\&]*)\/video\/([^\/\?\&]*)/;
     const videoId = regex.exec(url);
     console.log("test videoId", videoId);
 
@@ -103,7 +108,6 @@ export default class TikTokEmbed {
     iframe.setAttribute("src", this.embed);
     iframe.setAttribute("allowfullscreen", true);
     iframe.setAttribute("scrolling", "no");
-
 
     plyrContainer.appendChild(iframe);
 
@@ -135,15 +139,15 @@ export default class TikTokEmbed {
     const caption = blockContent.querySelector(`.${this.CSS.caption}`);
     const frame = blockContent.querySelector("iframe");
 
-    console.log('test frame', frame);
-  //   frame.addEventListener( "load", function(e) {
+    console.log("test frame", frame);
+    //   frame.addEventListener( "load", function(e) {
 
-  //     this.style.backgroundColor = "red";
-  //     alert(this.nodeName);
-  
-  //     console.log(e.target);
-  
-  // } )
+    //     this.style.backgroundColor = "red";
+    //     alert(this.nodeName);
+
+    //     console.log(e.target);
+
+    // } )
     return {
       service: "TikTok",
       embed: this.embed,
