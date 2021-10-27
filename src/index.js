@@ -75,11 +75,11 @@ export default class TikTokEmbed {
 
         this.style.backgroundColor = "red";
 
-        console.log('test scrollHeight', frame.contentWindow.document.body.scrollHeight);
+        console.log('test scrollHeight', e.target.contentWindow.document.body.scrollHeight);
 
     } )
 
-      console.log("test frame in embedIsReady", frame);
+      console.log("test frame in embedIsReady", frame.contentWindow.document.body.scrollHeight);
     });
     this.wrapper = container;
     return container;
