@@ -103,8 +103,8 @@ export default class TikTokEmbed {
     iframe.setAttribute("src", this.embed);
     iframe.setAttribute("allowfullscreen", true);
     iframe.setAttribute("scrolling", "no");
+    iframe.onload="rubberFrame(this)"
 
-    console.log('test iframe height', iframe.contentWindow.document.body.scrollHeight);
 
     plyrContainer.appendChild(iframe);
 
@@ -123,6 +123,10 @@ export default class TikTokEmbed {
    */
   static get isReadOnlySupported() {
     return true;
+  }
+
+  static rubberFrame() {
+    console.log('test onload');
   }
 
   /**
